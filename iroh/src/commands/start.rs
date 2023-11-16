@@ -47,20 +47,20 @@ pub struct StartArgs {
     ///
     /// Only used with `start` or `--start`
     #[clap(long, short, global = true, default_value_t = SocketAddr::from(iroh::node::DEFAULT_BIND_ADDR))]
-    addr: SocketAddr,
+    pub addr: SocketAddr,
     /// Use a token to authenticate requests for data.
     ///
     /// Pass "random" to generate a random token, or base32-encoded bytes to use as a token
     ///
     /// Only used with `start` or `--start`
     #[clap(long, global = true)]
-    request_token: Option<RequestTokenOptions>,
+    pub request_token: Option<RequestTokenOptions>,
 
     /// The RPC port that the the Iroh node will listen on.
     ///
     /// Only used with `start` or `--start`
     #[clap(long, global = true, default_value_t = DEFAULT_RPC_PORT)]
-    rpc_port: u16,
+    pub rpc_port: u16,
 }
 
 impl StartArgs {
@@ -162,7 +162,7 @@ impl StartArgs {
         Ok(())
     }
 
-    async fn start_node(
+    pub(crate) async fn start_node(
         &self,
         rt: &runtime::Handle,
         token: Option<RequestToken>,
